@@ -1,10 +1,16 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/globals.scss";
-import { Home } from "./pages/home";
+import { AppContainer } from "./components/layouts";
+import { Home, Contacts } from "./pages";
 
 export const App = () => (
-  <Routes>
-    <Route index path="/" Component={Home} />
-  </Routes>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<AppContainer />}>
+        <Route index element={<Home />} />
+        <Route path="contacts" element={<Contacts />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );

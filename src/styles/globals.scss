@@ -6,7 +6,8 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  scroll-behavior: smooth;
+  position: relative;
+  scroll-behavior: smooth !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -25,6 +26,11 @@ a {
 }
 button:focus {
   outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 // .container {

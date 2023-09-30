@@ -25,9 +25,9 @@ const HiddenCheckbox = styled.input`
 const StyledCheckbox = styled.div<{ checked: boolean }>`
   display: inline-block;
   position: relative;
-  margin-right: 5px;
-  width: 20px;
-  height: 20px;
+  margin-right: 4px;
+  width: 16px;
+  height: 16px;
   border-radius: 2px;
   border: 1px solid ${Colors.border.primary};
   transition: all 150ms;
@@ -35,13 +35,13 @@ const StyledCheckbox = styled.div<{ checked: boolean }>`
   &::after {
     content: "";
     position: absolute;
-    left: 2px;
-    top: 2px;
-    width: 15px;
-    height: 10px;
+    left: 1.5px;
+    top: 1px;
+    width: 12px;
+    height: 8px;
     border-radius: 1px;
-    border-left: 4px solid #000000;
-    border-bottom: 4px solid #000000;
+    border-left: 3px solid #000000;
+    border-bottom: 3px solid #000000;
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);

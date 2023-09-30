@@ -18,7 +18,7 @@ import {
   Ul,
   RadioButton,
   Checkbox,
-} from "../../components";
+} from "../..";
 
 export const Home: React.FC = () => {
   const [isChecked, setIsChecked] = useState(false);

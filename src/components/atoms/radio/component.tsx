@@ -17,7 +17,7 @@ const Mark = styled.span`
   border-radius: 50%;
   vertical-align: middle;
   left: 0;
-  margin-right: 5px;
+  margin-right: 4px;
   
   &::after {
     content: '';
