@@ -1,2 +1,3 @@
 export * from "./home";
-export * from "./contacts";
+export * from "./sign-up";
+export * from "./login";
