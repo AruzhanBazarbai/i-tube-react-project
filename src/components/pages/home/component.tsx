@@ -29,6 +29,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <H1>Hello world</H1>
+      <H1>Hello world</H1>
       <H2>Hello world</H2>
       <H3>Hello world</H3>
       <H4>Hello world</H4>
