@@ -25,7 +25,7 @@ const StyledButton = styled.button<Props>`
     disabled,
     boxShadow,
     hoverBackgroundColor,
-  }) => `
+  }: Props) => `
   ${StyledUtils.createTextTemplate({ fontWeight, fontSize, hoverColor, lineHeight, color })}
   background-color: ${backgroundColor};
   transition: all 0.2s linear;
@@ -60,6 +60,7 @@ export const Button: React.FC<Props> = ({
   fontWeight = FontWeight.Regular,
   lineHeight = LineHeight.Default,
   hoverBackgroundColor = Colors.background.black,
+  type = "submit",
   ...rest
 }) => (
   <StyledButton
@@ -75,6 +76,7 @@ export const Button: React.FC<Props> = ({
     fontWeight={fontWeight}
     lineHeight={lineHeight}
     hoverBackgroundColor={hoverBackgroundColor}
+    type={type}
     {...rest}
   >
     {children}

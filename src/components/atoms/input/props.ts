@@ -1,7 +1,9 @@
-import React, { HtmlHTMLAttributes } from "react";
+import React, { HTMLInputTypeAttribute, HtmlHTMLAttributes } from "react";
 import { TextAttributes } from "../../../common";
 
 export type Props = HtmlHTMLAttributes<HTMLInputElement> &
   TextAttributes & {
-    ref?: React.RefObject<HTMLInputElement>;
+    ref?: React.RefCallback<HTMLInputElement>;
+    className?: string;
+    type?: HTMLInputTypeAttribute;
   };

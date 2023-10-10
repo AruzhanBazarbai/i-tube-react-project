@@ -5,7 +5,8 @@ export const baseFetchAsync = async (
   token?: string,
 ): Promise<any> => {
   try {
-    const response = await fetch(process.env.PUBLIC_URL + url, {
+    console.log(process.env.REACT_APP_API_URL);
+    const response = await fetch(process.env.REACT_APP_API_URL + url, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",

@@ -1,11 +1,14 @@
 import { DataResponse } from "../../common";
 import { postAsync } from "../functions";
 
+const ROOT = "/auth";
+
 export const login = async (email: string, password: string): Promise<DataResponse<string>> =>
-  postAsync("/login", JSON.stringify({ email, password }));
-export const register = async (
+  postAsync(`${ROOT}/login`, JSON.stringify({ email, password }));
+
+export const registration = async (
   email: string,
   name: string,
   password: string,
 ): Promise<DataResponse<string>> =>
-  postAsync("/register", JSON.stringify({ email, name, password }));
+  postAsync(`${ROOT}/register`, JSON.stringify({ email, name, password }));
