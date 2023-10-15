@@ -27,7 +27,7 @@ export const Home: React.FC = () => {
     console.log(isChecked);
   };
   return (
-    <>
+    <section className="flex flex-column">
       <H1>Hello world</H1>
       <H1>Hello world</H1>
       <H2>Hello world</H2>
@@ -86,6 +86,6 @@ export const Home: React.FC = () => {
       <Checkbox checked={isChecked} onChange={onCLick}>
         SUrname
       </Checkbox>
-    </>
+    </section>
   );
 };

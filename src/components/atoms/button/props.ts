@@ -5,4 +5,5 @@ export type Props = TextAttributes &
   HtmlHTMLAttributes<HTMLButtonElement> &
   ButtonProps & {
     children?: React.ReactNode;
+    type?: "submit" | "reset" | "button";
   };
