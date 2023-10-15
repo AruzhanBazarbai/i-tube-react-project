@@ -7,8 +7,8 @@ export const login = async (email: string, password: string): Promise<DataRespon
   postAsync(`${ROOT}/login`, JSON.stringify({ email, password }));
 
 export const registration = async (
-  email: string,
+  // email: string,
   name: string,
   password: string,
 ): Promise<DataResponse<string>> =>
-  postAsync(`${ROOT}/register`, JSON.stringify({ email, name, password }));
+  postAsync(`${ROOT}/register`, JSON.stringify({ name, password }));

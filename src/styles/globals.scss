@@ -87,7 +87,24 @@ input:-webkit-autofill {
 }
 .container {
   max-width: 100vw;
-  // margin: 0 auto;
+  margin: 0 auto;
+}
+.main-container {
+  position: relative;
+  margin: 56px auto 0;
+  padding: 24px 0 0 0;
+  width: 80%;
+
+  &.open {
+    padding: 24px 24px 0 24px;
+    margin: 56px 0 0 16.66%;
+    width: 83.33%;
+  }
+  &.auth {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
 }
 .label {
   font-size: 14px;
@@ -95,3 +112,46 @@ input:-webkit-autofill {
   letter-spacing: 0em;
   text-align: left;
 }
+.error {
+  font-size: 12px;
+  line-height: 14px;
+  color: red;
+  padding: 5px 0 0 10px;
+}
+.password > span {
+  position: absolute;
+  display: inline-block;
+  width: 17px;
+  height: 15px;
+  background-image: url("../assets/images/icons/eye-hidden.png");
+  background-repeat: no-repeat;
+  // background-size: cover;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translate(0, 0);
+}
+.login-page {
+  display: flex;
+  padding: 20px 0;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: white;
+}
+.sidebar {
+  margin-top: 56px;
+  transition: all 3s linear;
+  position: fixed;
+  z-index: 100;
+}
+.img-flip {
+  transform: scaleY(-1);
+}
+// .icon {
+//     transition: all 2s linear;
+//     &:hover {
+//         background-color: #d2d2d2 !important;
+//         border-radius: 15px;
+//     }
+// }

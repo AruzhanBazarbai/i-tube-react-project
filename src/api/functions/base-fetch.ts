@@ -15,6 +15,7 @@ export const baseFetchAsync = async (
       },
       method,
       body,
+      mode: "no-cors",
     });
     return response.json();
   } catch (e) {

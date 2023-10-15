@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import classNames from "classnames";
 import { Button, H1, Input, NavLink, P } from "../../atoms";
-import { registration } from "../../../api";
+// import { registration } from "../../../api";
 
 type InputFields = {
   name: string;
@@ -25,7 +25,10 @@ export const SignUp: React.FC = () => {
       .string()
       .email("Incorrect email format")
       .required("This field is required")
-      .matches(/^[a-zA-Z0-9][a-zA-Z0-9_.-]*[a-zA-Z0-9]@[a-zA-Z]\.[a-zA-Z]{2,}$/, "Invalid email")
+      .matches(
+        /^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]@[a-zA-Z][a-zA-Z]*[a-zA-Z]\.[a-zA-Z]{2,}$/,
+        "Invalid email",
+      )
       .trim(),
     password: yup
       .string()
@@ -50,25 +53,26 @@ export const SignUp: React.FC = () => {
   const onSubmit = async (dataForm: InputFields) => {
     console.log("Submitting");
     console.log(dataForm);
-    const { isOk, data } = await registration(dataForm.email, dataForm.name, dataForm.password);
-    console.log(isOk, JSON.parse(data));
+    // const { data } = await registration(dataForm.email, dataForm.name);
+    // console.log(JSON.parse(data));
     reset();
   };
   useEffect(() => {
-    const f = async () => {
-      // const { isOk, data } = await registration("aruzhanart2003@mail.ru", "Aruzhan", "123123123");
-      // console.log(isOk, data);
-    };
-    f();
-  });
+    // const f = async () => {
+    //   const { data } = await registration("Aruzhan", "123123123");
+    //   console.log(data);
+    // };
+    // f();
+    // register({}, { required: true });
+  }, []);
 
   return (
-    <section className="container">
-      <form onSubmit={handleSubmit(onSubmit)} className="col-3 border mx-auto" autoComplete="off">
+    <section className="container login-page">
+      <form onSubmit={handleSubmit(onSubmit)} className="col-3 mx-auto" autoComplete="off">
         <H1 fontSize="30px" lineHeight="36px" fontWeight={700} className="mb-5 text-center">
           Sign up
         </H1>
-        <div className="w-100 mb-4">
+        <div className="w-100 mb-3">
           <label htmlFor="name" className={classNames(["label d-block mb-2"])}>
             Name
           </label>
@@ -76,48 +80,62 @@ export const SignUp: React.FC = () => {
             id="name"
             type="text"
             placeholder="Full name"
-            {...(register("name"), { required: true })}
+            registerTemplate={register("name")}
             className={classNames(["col-12"])}
           />
-          <p>{errors.name?.message}</p>
+          <p className="error">{errors.name?.message}</p>
         </div>
-        <div className="">
-          <label htmlFor="email">Email</label>
+        <div className="w-100 mb-3">
+          <label htmlFor="email" className={classNames(["label d-block mb-2"])}>
+            Email
+          </label>
           <Input
             id="email"
             type="email"
             placeholder="Email"
             className={classNames(["w-full"])}
-            {...register("email", { required: true })}
+            registerTemplate={register("email")}
           />
-          <p>{errors.email?.message}</p>
+          <p className="error">{errors.email?.message}</p>
         </div>
-        <div>
-          <label htmlFor="password">Create a password</label>
+        <div className="password position-relative w-100 mb-3">
+          <label htmlFor="password" className={classNames(["label d-block mb-2"])}>
+            Create a password
+          </label>
           <Input
             id="password"
             type="password"
             placeholder="Password"
-            {...register("password", { required: true })}
+            registerTemplate={register("password")}
           />
-          <p>{errors.password?.message}</p>
+          <span />
+          <p className="error">{errors.password?.message}</p>
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm a password</label>
+        <div className="password position-relative w-100 mb-3">
+          <label htmlFor="confirmPassword" className={classNames(["label d-block mb-2"])}>
+            Confirm a password
+          </label>
           <Input
             id="confirmPassword"
-            type="text"
+            type="password"
             placeholder="Password"
-            {...register("confirmPassword", { required: true })}
+            registerTemplate={register("confirmPassword")}
           />
-          <p>{errors.confirmPassword?.message}</p>
+          <span />
+          <p className="error">{errors.confirmPassword?.message}</p>
         </div>
-        <Button type="submit" disabled={isLoading}>
+        <Button type="submit" borderRadius="10px" disabled={isLoading} className="mt-4 mb-5 w-100">
           Sign Up
         </Button>
-        <P>
+        <P fontSize="14px" lineHeight="17px" className="text-center mt-n3">
           Already have an account?{" "}
-          <NavLink href="/login" className="link">
+          <NavLink
+            fontSize="14px"
+            lineHeight="17px"
+            fontWeight={600}
+            href="/login"
+            className="link"
+          >
             Log in
           </NavLink>
         </P>

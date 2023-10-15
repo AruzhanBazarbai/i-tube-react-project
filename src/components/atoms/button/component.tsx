@@ -36,6 +36,8 @@ const StyledButton = styled.button<Props>`
   outline: none;
   box-shadow: ${boxShadow};
   padding: ${ButtonUtils.getButtonSize(size || "md")};
+  ${backgroundColor === "transparent" ? "padding: 12px;" : ""}
+  text-align: center;
 
   &:hover {
     background-color: ${hoverBackgroundColor};
@@ -59,7 +61,7 @@ export const Button: React.FC<Props> = ({
   fontSize = FontSize.Default,
   fontWeight = FontWeight.Regular,
   lineHeight = LineHeight.Default,
-  hoverBackgroundColor = Colors.background.black,
+  hoverBackgroundColor = Colors.background.grey,
   type = "submit",
   ...rest
 }) => (

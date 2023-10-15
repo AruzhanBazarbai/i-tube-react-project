@@ -33,7 +33,15 @@ export const Input: React.FC<Props> = ({
   lineHeight = LineHeight.Default,
   color = Colors.text.primary,
   type = "text",
+  registerTemplate,
   ...rest
 }) => (
-  <StyledInput color={color} fontSize={fontSize} lineHeight={lineHeight} type={type} {...rest} />
+  <StyledInput
+    color={color}
+    fontSize={fontSize}
+    lineHeight={lineHeight}
+    type={type}
+    {...registerTemplate}
+    {...rest}
+  />
 );

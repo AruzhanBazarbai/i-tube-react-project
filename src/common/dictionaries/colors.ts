@@ -17,5 +17,7 @@ export const Colors = {
   background: {
     white: "#ffffff",
     black: "#000000",
+    grey: "#3b3b3b",
+    grey2: "#0000000D",
   },
 };
