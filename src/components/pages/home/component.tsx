@@ -1,34 +1,21 @@
 import React, { useState } from "react";
-import {
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  Button,
-  P,
-  Span,
-  TextArea,
-  Input,
-  Anchor,
-  NavLink,
-  Img,
-  Li,
-  Ul,
-  RadioButton,
-  Checkbox,
-} from "../..";
+import { videos } from "./mock";
+import { Video } from "../../organisms";
 
 export const Home: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isChecked, setIsChecked] = useState(false);
-  const onCLick = () => {
-    setIsChecked(!isChecked);
-    console.log(isChecked);
-  };
+  // const onCLick = () => {
+  //   setIsChecked(!isChecked);
+  //   console.log(isChecked);
+  // };
+  // onCLick();
   return (
-    <section className="flex flex-column">
-      <H1>Hello world</H1>
+    <section className="d-flex flex-wrap row-gap-5">
+      {videos.map((el, ind) => (
+        <Video data={el} state="basic" className="col-3 pe-3" key={el.thumbnailSrc + ind} />
+      ))}
+      {/* <H1>Hello world</H1>
       <H1>Hello world</H1>
       <H2>Hello world</H2>
       <H3>Hello world</H3>
@@ -85,7 +72,7 @@ export const Home: React.FC = () => {
       <br />
       <Checkbox checked={isChecked} onChange={onCLick}>
         SUrname
-      </Checkbox>
+      </Checkbox> */}
     </section>
   );
 };

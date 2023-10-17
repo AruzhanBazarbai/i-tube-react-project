@@ -4,6 +4,7 @@ export const Colors = {
     secondary: "#0000b3",
     blue: "#009FE3",
     white: "#ffffff",
+    grey: "#6b6b6b",
   },
   border: {
     primary: "#D8DADC",
