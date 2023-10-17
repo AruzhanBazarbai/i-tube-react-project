@@ -152,6 +152,11 @@ input:-webkit-autofill {
   padding-left: 24px;
   padding-right: 109px;
 }
+.channel-background {
+  width: calc(100% + 48px);
+  height: 192px;
+  margin: -24px -24px 24px -24px;
+}
 // .icon {
 //     transition: all 2s linear;
 //     &:hover {
