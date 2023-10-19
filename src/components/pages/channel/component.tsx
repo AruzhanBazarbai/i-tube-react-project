@@ -16,7 +16,7 @@ export const Channel: React.FC = () => {
       <ChannelInfo channelInfo={channelInfo} />
       <div className="d-flex flex-wrap row-gap-5">
         {videos.map((el, ind) => (
-          <Video data={el} state="basic" className="col-3 pe-3" key={el.thumbnailSrc + ind} />
+          <Video data={el} state="channel" className="col-3 pe-3" key={el.thumbnailSrc + ind} />
         ))}
       </div>
     </section>

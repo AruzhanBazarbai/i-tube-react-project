@@ -5,3 +5,4 @@ export * from "./data-reponse";
 export * from "./user";
 export * from "./video-props";
 export * from "./channel-props";
+export * from "./comment-props";

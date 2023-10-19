@@ -1,5 +1,8 @@
+import { CommentProps } from "./comment-props";
+
 export type VideoProps = {
-  videoSrc?: string;
+  videoLink?: string;
+  channelLink?: string;
   thumbnailSrc?: string | any;
   title: string;
   channelName?: string;
@@ -10,4 +13,6 @@ export type VideoProps = {
   duration?: string;
   likeCount?: string;
   dislikeCount?: string;
+  channelSubsCnt?: string;
+  comments?: CommentProps[];
 };
