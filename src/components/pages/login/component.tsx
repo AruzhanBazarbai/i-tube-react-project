@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { Button, H1, Input, NavLink, P } from "../../atoms";
-// import { registration } from "../../../api";
+import { login } from "../../../api";
 
 type InputFields = {
   email: string;
@@ -12,6 +13,8 @@ type InputFields = {
 };
 
 export const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -40,9 +43,15 @@ export const Login: React.FC = () => {
 
   const onSubmit = async (dataForm: InputFields) => {
     console.log("Submitting");
-    console.log(dataForm);
-    // const { data } = await registration(dataForm.email, dataForm.name);
-    // console.log(JSON.parse(data));
+    // console.log(dataForm);
+    const data = login(dataForm.email, dataForm.password);
+    console.log(data);
+    if (data) {
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      navigate("/");
+    } else {
+      navigate("/sign-up");
+    }
     reset();
   };
   useEffect(() => {

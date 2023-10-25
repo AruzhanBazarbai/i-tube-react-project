@@ -30,3 +30,24 @@
     transform: translate(0, -50%);
   }
 }
+.searchInput {
+  display: block;
+  margin: 0;
+  padding: 10px 44px !important;
+  border: 1px solid #d8dadc;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: InterRegular;
+  line-height: 19px;
+  transition: all 0.2s linear;
+  width: 100%;
+  -webkit-appearance: none;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    border: 1px solid #009fe3;
+    cursor: pointer;
+  }
+}

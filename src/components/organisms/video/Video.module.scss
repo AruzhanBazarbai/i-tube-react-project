@@ -1,23 +1,23 @@
 .thumnailWrapper {
-  // width: 276px;
-  // height: 155px;
-  width: 100%;
-  height: auto;
+  max-width: 276px;
+  max-height: 155px;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
 
   &.similar {
-    width: 41%;
-    // width: 168px;
-    // height: 94px;
-    height: auto;
+    max-width: 168px;
+    max-height: 94px;
   }
-  &.search {
-    width: 30%;
-    // width: 168px;
-    // height: 94px;
-    height: auto;
+  // &.search {
+  //   // width: 30%;
+  //   width: 276px;
+  //   height: 155px;
+  //   // height: auto;
+  // }
+  & img {
+    object-fit: cover !important;
+    object-position: center;
   }
 }
 .time {
