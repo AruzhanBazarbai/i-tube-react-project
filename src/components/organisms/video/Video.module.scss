@@ -1,0 +1,33 @@
+.thumnailWrapper {
+  max-width: 276px;
+  max-height: 155px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  &.similar {
+    max-width: 168px;
+    max-height: 94px;
+  }
+  // &.search {
+  //   // width: 30%;
+  //   width: 276px;
+  //   height: 155px;
+  //   // height: auto;
+  // }
+  & img {
+    object-fit: cover !important;
+    object-position: center;
+  }
+}
+.time {
+  background-color: black;
+  color: white;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  border-radius: 4px;
+  padding: 3px 4px;
+  font-size: 10px;
+  line-height: 12px;
+}

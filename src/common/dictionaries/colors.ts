@@ -4,6 +4,7 @@ export const Colors = {
     secondary: "#0000b3",
     blue: "#009FE3",
     white: "#ffffff",
+    grey: "#6b6b6b",
   },
   border: {
     primary: "#D8DADC",
@@ -17,5 +18,7 @@ export const Colors = {
   background: {
     white: "#ffffff",
     black: "#000000",
+    grey: "#3b3b3b",
+    grey2: "#0000000D",
   },
 };

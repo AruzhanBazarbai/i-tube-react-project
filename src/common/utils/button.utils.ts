@@ -6,11 +6,11 @@ export class ButtonUtils {
       case "s":
         return "8px 12px";
       case "s2":
-        return "8px 24px";
+        return "8px 20px";
       case "sm":
-        return "12px 24px";
+        return "10px 30px";
       case "lg":
-        return "18px 148px";
+        return "18px 28px";
       case "md":
       default:
         return "16px 24px";

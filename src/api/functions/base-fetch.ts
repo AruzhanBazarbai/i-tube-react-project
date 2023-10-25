@@ -5,16 +5,21 @@ export const baseFetchAsync = async (
   token?: string,
 ): Promise<any> => {
   try {
-    const response = await fetch(process.env.PUBLIC_URL + url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json; charset=UTF-8",
-        "Accept-Language": "en",
-      },
+    const headers: Record<string, string> = {
+      Accept: "application/json",
+      "Content-Type": "application/json; charset=UTF-8",
+      "Accept-Language": "en",
+    };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    const response = await fetch(url, {
+      headers,
       method,
       body,
+      mode: "no-cors",
     });
+    // console.log(response);
     return response.json();
   } catch (e) {
     return console.error(e);

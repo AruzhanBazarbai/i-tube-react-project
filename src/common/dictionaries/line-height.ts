@@ -6,7 +6,9 @@ export enum LineHeight {
   H5 = "30px",
   H6 = "24px",
   Default = "19px",
-  Small = "22px",
+  Primary = "17px",
+  Secondary = "15px",
+  Small = "17px",
   Caption = "18px",
   Signature = "16px",
 }
