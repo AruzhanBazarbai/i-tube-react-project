@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import classNames from "classnames";
 import { Button, H1, Input, NavLink, P } from "../../atoms";
+import { registration } from "../../../api";
 // import { registration } from "../../../api";
 
 type InputFields = {
@@ -49,10 +51,19 @@ export const SignUp: React.FC = () => {
   } = useForm<InputFields>({ resolver: yupResolver(schema) });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (dataForm: InputFields) => {
     console.log("Submitting");
-    console.log(dataForm);
+    // console.log(dataForm);
+    const data = registration(dataForm.email, dataForm.name, dataForm.password);
+    console.log(data);
+    if (data) {
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      navigate("/");
+    } else {
+      console.error("some error in registration process");
+    }
     // const { data } = await registration(dataForm.email, dataForm.name);
     // console.log(JSON.parse(data));
     reset();

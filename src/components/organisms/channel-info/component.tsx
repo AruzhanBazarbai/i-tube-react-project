@@ -6,8 +6,16 @@ import { Colors } from "../../../common";
 
 export const ChannelInfo: React.FC<Props> = ({ channelInfo, className }) => (
   <div className={classNames(["d-flex column-gap-4 px-4", className])}>
-    <div style={{ minWidth: "100px", minHeight: "100px" }}>
-      <Img src={channelInfo.profileSrc} alt="channel-profile" />
+    <div
+      style={{
+        minWidth: "100px",
+        minHeight: "100px",
+        border: "none",
+        borderRadius: "50px",
+        overflow: "hidden",
+      }}
+    >
+      <Img src={channelInfo.profileSrc} alt="channel-profile" width="100px" height="100px" />
     </div>
     <div className="d-flex flex-column row-gap-2">
       <P fontSize="24px" lineHeight="29px" fontWeight={600}>

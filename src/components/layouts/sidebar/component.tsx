@@ -1,12 +1,13 @@
 /* eslint-disable import/no-dynamic-require */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { AppDispatch, RootState } from "../../../store";
-import { Button, Img, Li, P, Ul } from "../../atoms";
+import { Anchor, Button, Img, Li, P, Ul } from "../../atoms";
 import { Colors } from "../../../common";
 import { setSidebarState } from "../../../store/slices/sidebar";
+import { getChannelById } from "../../../api";
 
 export const SideBar: React.FC = () => {
   const sidebar = useSelector((state: RootState) => state.sidebar.state);
@@ -20,6 +21,21 @@ export const SideBar: React.FC = () => {
   const location = useLocation().pathname;
   const [show, setShow] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
+  const [currentUser] = useState({
+    id: "",
+    name: "",
+    email: "",
+    password: "",
+    profileSrc: require("../../../assets/images/icons/profile.png"),
+    subscriptions: [
+      {
+        channelId: "",
+      },
+    ],
+  });
+
   useEffect(() => {
     if (location === "/login" || location === "/sign-up") {
       setShow(false);
@@ -27,7 +43,18 @@ export const SideBar: React.FC = () => {
     } else {
       setShow(true);
     }
-  }, [location, show, dispatch]);
+  }, [location, show, dispatch, navigate]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("currentUser");
+    console.log(data);
+    // setCurrentUser(JSON.parse(data ?? ""));
+    if (!data) {
+      navigate("/login");
+      // window.location.href = "http://localhost:3000/login";
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <nav
@@ -43,34 +70,31 @@ export const SideBar: React.FC = () => {
           borderRadius="8px"
           className="d-flex column-gap-3 align-items-center p-2 w-100"
         >
-          <Img
-            src={require("../../../assets/images/icons/profile.png")}
-            width="44px"
-            height="44px"
-            alt="profile"
-          />
+          <Img src={currentUser.profileSrc} width="44px" height="44px" alt="profile" />
           <P fontSize="14px" lineHeight="20px">
-            Alony Haust
+            {currentUser.name}
           </P>
         </Button>
         <div className="py-3">
-          <Button
-            hoverBackgroundColor={Colors.background.grey2}
-            backgroundColor="transparent"
-            borderRadius="8px"
-            className="d-flex column-gap-3 align-items-center w-100 mb-1"
-          >
-            <Img
-              src={require("../../../assets/images/icons/home.png")}
-              width="16px"
-              height="18px"
-              alt="icon"
-              className="me-1"
-            />
-            <P fontSize="14px" lineHeight="20px">
-              Home
-            </P>
-          </Button>
+          <Anchor href="/">
+            <Button
+              hoverBackgroundColor={Colors.background.grey2}
+              backgroundColor="transparent"
+              borderRadius="8px"
+              className="d-flex column-gap-3 align-items-center w-100 mb-1"
+            >
+              <Img
+                src={require("../../../assets/images/icons/home.png")}
+                width="16px"
+                height="18px"
+                alt="icon"
+                className="me-1"
+              />
+              <P fontSize="14px" lineHeight="20px">
+                Home
+              </P>
+            </Button>
+          </Anchor>
           <Button
             hoverBackgroundColor={Colors.background.grey2}
             backgroundColor="transparent"
@@ -113,7 +137,30 @@ export const SideBar: React.FC = () => {
           Subscriptions
         </P>
         <Ul>
-          <Li>
+          {currentUser.subscriptions.map((el, ind) => (
+            <Li key={ind}>
+              <Anchor href={`/channel/${el.channelId}`}>
+                <Button
+                  hoverBackgroundColor={Colors.background.grey2}
+                  backgroundColor="transparent"
+                  borderRadius="8px"
+                  className="d-flex column-gap-3 align-items-center w-100 mb-1"
+                >
+                  <Img
+                    src={getChannelById(el.channelId ?? "1")?.profileSrc}
+                    width="24px"
+                    height="24px"
+                    alt="icon"
+                    className="rounded-5"
+                  />
+                  <P fontSize="14px" lineHeight="20px" className="text-start">
+                    {getChannelById(el.channelId ?? "1")?.name}
+                  </P>
+                </Button>
+              </Anchor>
+            </Li>
+          ))}
+          {/* <Li>
             <Button
               hoverBackgroundColor={Colors.background.grey2}
               backgroundColor="transparent"
@@ -148,25 +195,7 @@ export const SideBar: React.FC = () => {
                 Michael Dam
               </P>
             </Button>
-          </Li>
-          <Li>
-            <Button
-              hoverBackgroundColor={Colors.background.grey2}
-              backgroundColor="transparent"
-              borderRadius="8px"
-              className="d-flex column-gap-3 align-items-center w-100 mb-1"
-            >
-              <Img
-                src={require("../../../assets/images/icons/profile.png")}
-                width="24px"
-                height="24px"
-                alt="icon"
-              />
-              <P fontSize="14px" lineHeight="20px">
-                Michael Dam
-              </P>
-            </Button>
-          </Li>
+          </Li> */}
         </Ul>
         <Button
           hoverBackgroundColor="transparent"

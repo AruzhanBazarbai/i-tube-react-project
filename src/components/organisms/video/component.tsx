@@ -18,7 +18,7 @@ export const Video: React.FC<Props> = ({ state, data, className }) => (
     ])}
   >
     <div className={classNames([classes.thumnailWrapper, classes[state]])}>
-      <Anchor href={data.videoLink}>
+      <Anchor href={`/video/${data.id}`}>
         <Img src={data?.thumbnailSrc ?? ""} alt="video thumbnail" />
         {data?.duration && <div className={classes.time}>{data?.duration}</div>}
       </Anchor>
@@ -31,18 +31,18 @@ export const Video: React.FC<Props> = ({ state, data, className }) => (
     >
       <div className={classNames([state === "search" && "d-flex"])}>
         {(state === "basic" || state === "search") && (
-          <Anchor href={data.channelLink}>
+          <Anchor href={`/channel/${data.channelId}`}>
             <Img
               src={data?.channelProfileSrc ?? ""}
               alt="channel profile"
               width="36px"
               height="36px"
-              className={classNames([state === "basic" ? "me-4" : "me-2"])}
+              className={classNames([state === "basic" ? "me-4" : "me-2", "rounded-5"])}
             />
           </Anchor>
         )}
         {state === "search" && (
-          <Anchor href={data.channelLink} className="align-self-center">
+          <Anchor href={`/channel/${data.channelId}`} className="align-self-center">
             <P fontSize="13px" lineHeight="16px" color={Colors.text.grey}>
               {data?.channelName}
             </P>
@@ -50,7 +50,7 @@ export const Video: React.FC<Props> = ({ state, data, className }) => (
         )}
       </div>
       <div className="d-flex flex-grow flex-column">
-        <Anchor href={data.videoLink}>
+        <Anchor href={`/video/${data.id}`}>
           <P
             fontSize={state === "search" ? "20px" : "14px"}
             lineHeight={state === "search" ? "24px" : "17px"}
@@ -61,13 +61,13 @@ export const Video: React.FC<Props> = ({ state, data, className }) => (
           </P>
         </Anchor>
         {state !== "search" && state !== "channel" && (
-          <Anchor href={data.channelLink}>
+          <Anchor href={`/channel/${data.channelId}`}>
             <P fontSize="12px" lineHeight="15px" color={Colors.text.grey}>
               {data?.channelName}
             </P>
           </Anchor>
         )}
-        <Anchor href={data.videoLink}>
+        <Anchor href={`/video/${data.id}`}>
           <P fontSize="12px" lineHeight="15px" color={Colors.text.grey}>
             {data?.viewsCount} &#183; {data?.createdAt}
           </P>
