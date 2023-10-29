@@ -48,18 +48,18 @@ export const SideBar: React.FC = () => {
   useEffect(() => {
     const data = localStorage.getItem("currentUser");
     console.log(data);
-    // setCurrentUser(JSON.parse(data ?? ""));
     if (!data) {
+      // 👍
       navigate("/login");
       // window.location.href = "http://localhost:3000/login";
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // navigate получается от хука, вполне можно вставить в маунт хук
+  }, [navigate]);
 
   return (
     <nav
       className={classNames([
-        sidebar === "open" && show ? "" : "d-none",
+        sidebar === "open" && show ? "d-not-none" : "d-none",
         "sidebar col-2 d-flex flex-column p-3",
       ])}
     >

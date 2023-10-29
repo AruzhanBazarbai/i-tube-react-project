@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import sidebarReducer from "./slices/sidebar";
-import headerReducer from "./slices/header";
+import { sidebarReducer as sidebar, headerReducer as header } from "./slices";
+// Алиасами можно сократить количество назначении на атрибьюта типа name: value
+// Тоже субъективно вполне
 
 export const store = configureStore({
   reducer: {
-    sidebar: sidebarReducer,
-    header: headerReducer,
+    sidebar,
+    header,
   },
 });
 

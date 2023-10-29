@@ -1,3 +1,5 @@
+// Почему именно такая структура у проекта? Это какой-то архитектурный паттерн?
+
 export * from "./home";
 export * from "./sign-up";
 export * from "./login";
