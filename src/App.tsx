@@ -7,11 +7,11 @@ import { Home, SignUp, Login, Search, Channel, VideoDetail } from "./pages";
 export const App = () => {
   React.useEffect(() => {
     // Он закэшируется
-    fetch('https://api.publicapis.org/entries', {
+    fetch("https://api.publicapis.org/entries", {
       headers: {
-        'x-is-cacheable': "true",
+        "x-is-cacheable": "true",
       },
-      mode: 'no-cors'
+      mode: "no-cors",
     }).then((res) => console.log(res));
   }, []);
 
@@ -28,5 +28,5 @@ export const App = () => {
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 };

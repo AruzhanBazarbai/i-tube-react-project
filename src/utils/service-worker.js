@@ -19,22 +19,23 @@ precacheAndRoute(self.__WB_MANIFEST);
 const cacheableResponse = new CacheableResponse({
   statuses: [0, 200], // только для статусов указанных тут
   headers: {
-    'x-is-cacheable': 'true'
-  }
+    "x-is-cacheable": "true",
+  },
 });
 
-registerRoute( // почитать https://developer.chrome.com/docs/workbox/modules/workbox-routing/
+registerRoute(
+  // почитать https://developer.chrome.com/docs/workbox/modules/workbox-routing/
   () => true, // (request) => true
   // Тут идет проверка, если true - кэшируем, если false - то нет
   // request - объект запроса
   // Пример  ({request}) => request.destination === 'image',
   // т.е. тут мы кэшируем все запросы, давай я в App.js, в useEffect сделаю запрос и посмотрим
   new NetworkFirst({
-    cacheName: 'api-cache', // имя кэша в браузера, заходишь Application -> Cache storage и там будет
+    cacheName: "api-cache", // имя кэша в браузера, заходишь Application -> Cache storage и там будет
     plugins: [
-      cacheableResponse // наш плагин, плагинов можно несколько использовать
-    ]
-  })
+      cacheableResponse, // наш плагин, плагинов можно несколько использовать
+    ],
+  }),
 );
 
 // Все что ниже это дефолтный код который генерирует воркбокс, можно посмотреть

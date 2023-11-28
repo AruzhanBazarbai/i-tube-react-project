@@ -192,12 +192,24 @@ input:-webkit-autofill {
 }
 
 // Но анимации срабатывают и на старте, можем их перебить добавив класс preload
-body.preload *{
+body.preload * {
   animation-duration: 0s !important;
   -webkit-animation-duration: 0s !important;
-  transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
+  transition:
+    background-color 0s,
+    opacity 0s,
+    color 0s,
+    width 0s,
+    height 0s,
+    padding 0s,
+    margin 0s !important;
+}
 
 @keyframes slideright {
-  0%   {left: -300px}
-  100% {left: 0px}
+  0% {
+    left: -300px;
+  }
+  100% {
+    left: 0px;
+  }
 }
