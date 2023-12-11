@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -42,25 +43,25 @@ export const Header: React.FC = () => {
         data
           ? JSON.parse(data)
           : {
-            id: "",
-            name: "",
-            email: "",
-            password: "",
-            profileSrc: require("../../../assets/images/icons/profile.png"),
-            subscriptions: [],
-          },
+              id: "",
+              name: "",
+              email: "",
+              password: "",
+              profileSrc: require("../../../assets/images/icons/profile.png"),
+              subscriptions: [],
+            },
       );
       setCurrentUser(
         data
           ? JSON.parse(data)
           : {
-            id: "",
-            name: "",
-            email: "",
-            password: "",
-            profileSrc: require("../../../assets/images/icons/profile.png"),
-            subscriptions: [],
-          },
+              id: "",
+              name: "",
+              email: "",
+              password: "",
+              profileSrc: require("../../../assets/images/icons/profile.png"),
+              subscriptions: [],
+            },
       );
     }
   }, [location, navigate]);
@@ -78,7 +79,7 @@ export const Header: React.FC = () => {
     }, 900);
 
     return () => clearTimeout(handleSearch);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, search]);
 
   const handleLogout = () => {

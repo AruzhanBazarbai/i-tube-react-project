@@ -10,9 +10,9 @@ export const Video: React.FC<Props> = ({ state, data, className }) => {
   // Чтобы часто не считать можно так обернуть
   // Если state обновляется каждый раз то смысла от кода нет, можно просто как переменные наверх вынести
   // Тоже меньше кода будет 👍
-  
-  const stateSearchCond = useMemo(() => state === 'search', [state]);
-  const stateChannelCond = useMemo(() => state === 'channel', [state]);
+
+  const stateSearchCond = useMemo(() => state === "search", [state]);
+  const stateChannelCond = useMemo(() => state === "channel", [state]);
 
   return (
     <div
@@ -83,5 +83,5 @@ export const Video: React.FC<Props> = ({ state, data, className }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };

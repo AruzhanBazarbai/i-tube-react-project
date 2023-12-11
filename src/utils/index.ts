@@ -1,1 +1,1 @@
-export * as serviceWorkerRegistration from './sw-register';
+export * as serviceWorkerRegistration from "./sw-register";
