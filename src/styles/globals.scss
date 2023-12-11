@@ -138,6 +138,7 @@ input:-webkit-autofill {
 }
 .channel-background {
   width: calc(100% + 48px);
+  overflow: hidden;
   height: 192px;
   margin: -24px -24px 24px -24px;
 }

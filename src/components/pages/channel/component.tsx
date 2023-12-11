@@ -2,33 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ChannelInfo, Video } from "../../organisms";
 import { Img } from "../../atoms";
-import { VideoProps } from "../../../common";
-import { getChannelById, getVideosByChannel } from "../../../api";
+import { ChannelProps, VideoProps } from "../../../common";
 
 export const Channel: React.FC = () => {
   const channelId = useParams().id?.toString(); // { id: string }
-  const [videos, setVideos] = useState<VideoProps[]>(getVideosByChannel(channelId ?? "1"));
-  const [channel, setChannel] = useState(getChannelById(channelId ?? "1"));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [allVideos, setAllVideos] = useState<VideoProps[]>([]);
+  const [videos, setVideos] = useState<VideoProps[]>([]);
+  const [channel, setChannel] = useState<ChannelProps>();
 
   useEffect(() => {
-    setVideos(getVideosByChannel(channelId ?? "1"));
-    setChannel(getChannelById(channelId ?? "1"));
+    (async () => {
+      await fetch("http://localhost:3000/videos")
+        .then((r) => r.json())
+        .then((res) => {
+          setAllVideos(res);
+          setVideos(res.filter((el: any) => el.channelId === channelId));
+        });
+      
+      await fetch(`http://localhost:3000/channels/${channelId ?? "1"}`)
+        .then((r) => r.json())
+        .then((res) => setChannel(res));
+    })();
   }, [channelId]);
 
   return (
-    <section className="d-flex flex-column row-gap-4">
-      <div className="channel-background">
-        <Img
-          src={channel?.backgroundSrc ?? require("../../../assets/images/icons/background.png")}
-          alt="channel-background-image"
-        />
-      </div>
-      <ChannelInfo channelInfo={channel} />
-      <div className="d-flex flex-wrap row-gap-5">
-        {videos.map((el, ind) => (
-          <Video data={el} state="channel" className="col-3 pe-3" key={el.thumbnailSrc + ind} />
-        ))}
-      </div>
-    </section>
+    channel ? (
+      <section className="d-flex flex-column row-gap-4">
+        <div className="channel-background">
+          <Img
+            src={channel?.backgroundSrc ?? require("../../../assets/images/icons/background.png")}
+            alt="channel-background-image"
+          />
+        </div>
+        <ChannelInfo channelInfo={channel} />
+        <div className="d-flex flex-wrap row-gap-5">
+          {videos.map((el, ind) => (
+            <Video data={el} state="channel" className="col-3 pe-3" key={el.thumbnailSrc + ind} />
+          ))}
+        </div>
+      </section>
+    ) : (<>empty</>)
   );
 };

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 import classNames from "classnames";
 import { Button, H1, Input, NavLink, P } from "../../atoms";
-import { registration } from "../../../api";
+// import { registration } from "../../../api";
+import { UserProps } from "../../../common";
 // import { registration } from "../../../api";
 
 type InputFields = {
@@ -49,32 +52,57 @@ export const SignUp: React.FC = () => {
     formState: { errors },
     reset,
   } = useForm<InputFields>({ resolver: yupResolver(schema) });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [users, setUsers] = useState<UserProps[]>([]);
 
   const onSubmit = async (dataForm: InputFields) => {
     console.log("Submitting");
-    // console.log(dataForm);
-    const data = registration(dataForm.email, dataForm.name, dataForm.password);
-    console.log(data);
-    if (data) {
-      localStorage.setItem("currentUser", JSON.stringify(data));
-      navigate("/");
-    } else {
-      console.error("some error in registration process");
-    }
-    // const { data } = await registration(dataForm.email, dataForm.name);
-    // console.log(JSON.parse(data));
+    setIsLoading(true);
+
+    (async () => {
+      const isFind = users.find((el) => el.email === dataForm.email && el.password === dataForm.password);
+      if (!isFind) {
+        await fetch("http://localhost:3000/users", {
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: uuidv4(),
+            profileSrc:
+              "https://w7.pngwing.com/pngs/364/361/png-transparent-account-avatar-profile-user-avatars-icon.png",
+            subscriptions: [],
+            email: dataForm.email,
+            name: dataForm.name,
+            password: dataForm.password,
+          }),
+        })
+          .then((r) => r.json())
+          .then(() => {
+            toast.success("You have been successfully signed up! Please, log in one more time.");
+            navigate("/login");
+          });
+      } else {
+        toast.error(
+          "The email you entered already exists in the system! Please, log in one more time.",
+        );
+        navigate("/login");
+      }
+    })();
     reset();
+    setIsLoading(false);
   };
+
   useEffect(() => {
-    // const f = async () => {
-    //   const { data } = await registration("Aruzhan", "123123123");
-    //   console.log(data);
-    // };
-    // f();
-    // register({}, { required: true });
+    (async () => {
+      await fetch("http://localhost:3000/users")
+        .then((r) => r.json())
+        .then((res) => {
+          setUsers(res);
+        });
+    })();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 export type ChannelProps = {
-  channelId: string;
+  id: string;
   profileSrc: any;
   backgroundSrc: any;
   name: string;
