@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { Button, H1, Input, NavLink, P } from "../../atoms";
-import { login } from "../../../api";
+import { UserProps } from "../../../common";
 
 type InputFields = {
   email: string;
@@ -14,6 +15,7 @@ type InputFields = {
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
+  const [users, setUsers] = useState<UserProps[]>([]);
 
   const schema = yup.object().shape({
     email: yup
@@ -38,29 +40,33 @@ export const Login: React.FC = () => {
     formState: { errors },
     reset,
   } = useForm<InputFields>({ resolver: yupResolver(schema) });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (dataForm: InputFields) => {
+    setIsLoading(true);
     console.log("Submitting");
-    // console.log(dataForm);
-    const data = login(dataForm.email, dataForm.password);
-    console.log(data);
-    if (data) {
-      localStorage.setItem("currentUser", JSON.stringify(data));
-      navigate("/");
-    } else {
-      navigate("/sign-up");
+    if (users.length > 0) {
+      const isFindData = users.find(
+        (el) => el.email === dataForm.email && el.password === dataForm.password,
+      );
+      if (isFindData) {
+        toast.success("You have successfully logged in!")
+        localStorage.setItem("currentUser", JSON.stringify(isFindData));
+        navigate("/");
+      } else {
+        toast.error("An unsuccessful authorization attempt. Please try again or sign up!");
+        // navigate("/sign-up");
+      }
+      reset();
     }
-    reset();
+    setIsLoading(false);
   };
   useEffect(() => {
-    // const f = async () => {
-    //   const { data } = await registration("Aruzhan", "123123123");
-    //   console.log(data);
-    // };
-    // f();
-    // register({}, { required: true });
+    (async () => {
+      await fetch("http://localhost:3000/users")
+        .then((r) => r.json())
+        .then((res) => setUsers(res));
+    })();
   }, []);
 
   return (

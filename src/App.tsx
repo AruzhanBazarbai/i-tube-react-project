@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/globals.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AppContainer } from "./components/layouts";
 import { Home, SignUp, Login, Search, Channel, VideoDetail } from "./pages";
 
@@ -27,6 +29,7 @@ export const App = () => {
           <Route path="video/:id" element={<VideoDetail />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 };

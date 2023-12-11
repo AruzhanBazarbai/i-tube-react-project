@@ -5,13 +5,25 @@ import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { AppDispatch, RootState } from "../../../store";
 import { Anchor, Button, Img, Li, P, Ul } from "../../atoms";
-import { Colors } from "../../../common";
+import { ChannelProps, Colors } from "../../../common";
 import { setSidebarState } from "../../../store/slices/sidebar";
-import { getChannelById } from "../../../api";
+// import { getChannelById } from "../../../api";
+
+// const sendRequestForChannel = async (
+//   channels: ChannelProps[],
+//   setChannels: React.Dispatch<React.SetStateAction<ChannelProps[]>>,
+//   channelId: string,
+// ) => {
+//   await fetch(`http://localhost:3000/channels/${channelId ?? "1"}`)
+//     .then((r) => r.json())
+//     .then((res) => setChannels([...channels, res]));
+// };
 
 export const SideBar: React.FC = () => {
   const sidebar = useSelector((state: RootState) => state.sidebar.state);
   const [showMore, setShowMore] = useState(false);
+
+  const [channels, setChannels] = useState<ChannelProps[]>([]);
 
   const handleShowMore = () => {
     console.log(showMore);
@@ -23,7 +35,8 @@ export const SideBar: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
-  const [currentUser] = useState({
+  const [allChannels, setAllChannels] = useState<ChannelProps[]>([]);
+  const [currentUser, setCurrentUser] = useState({
     id: "",
     name: "",
     email: "",
@@ -36,6 +49,12 @@ export const SideBar: React.FC = () => {
     ],
   });
 
+  // useEffect(() => {
+  //   await fetch(`http://localhost:3000/channels`)
+  //     .then((r) => r.json())
+  //     .then((res) => setChannel(res));
+  // }, [])
+
   useEffect(() => {
     if (location === "/login" || location === "/sign-up") {
       setShow(false);
@@ -46,14 +65,43 @@ export const SideBar: React.FC = () => {
   }, [location, show, dispatch, navigate]);
 
   useEffect(() => {
+    if (allChannels.length > 0) {
+      const data = localStorage.getItem("currentUser");
+      if (data) {
+        console.log(data)
+        const tempData = JSON.parse(data);
+        console.log(tempData)
+        console.log(allChannels)
+        setChannels(
+          tempData?.subscriptions.map((x: any) =>
+            allChannels.find((el) => el.id === x.channelId),
+          ),
+        );
+      }
+    }
+  }, [allChannels])
+
+  useEffect(() => {
     const data = localStorage.getItem("currentUser");
     console.log(data);
     if (!data) {
-      // 👍
-      navigate("/login");
-      // window.location.href = "http://localhost:3000/login";
+      if (location !== "/login" && location !== "/sign-up") {
+        // 👍
+        navigate("/login");
+        // window.location.href = "http://localhost:3000/login";
+      }
+    } else {
+      (async () => {
+        await fetch("http://localhost:3000/channels")
+          .then((r) => r.json())
+          .then((res) => {
+            setAllChannels(res);
+            console.log(res)
+          });
+      })();
+      const user = JSON.parse(data);
+      setCurrentUser(user);
     }
-    // navigate получается от хука, вполне можно вставить в маунт хук
   }, [navigate]);
 
   return (
@@ -147,14 +195,14 @@ export const SideBar: React.FC = () => {
                   className="d-flex column-gap-3 align-items-center w-100 mb-1"
                 >
                   <Img
-                    src={getChannelById(el.channelId ?? "1")?.profileSrc}
+                    src={channels[ind]?.profileSrc}
                     width="24px"
                     height="24px"
                     alt="icon"
                     className="rounded-5"
                   />
                   <P fontSize="14px" lineHeight="20px" className="text-start">
-                    {getChannelById(el.channelId ?? "1")?.name}
+                    {channels[ind]?.name}
                   </P>
                 </Button>
               </Anchor>

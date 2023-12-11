@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { VideoInfo, Comments, Video } from "../../organisms";
-import { getAllVideos, getComments, getVideo } from "../../../api";
+// import { getAllVideos, getComments, getVideo } from "../../../api";
 import { CommentProps, VideoProps } from "../../../common";
 
 export const VideoDetail: React.FC = () => {
   const videoId = useParams().id?.toString();
-  const [videoData, setVideoData] = useState<VideoProps>(getVideo(videoId ?? "1"));
-  const [videosData] = useState<VideoProps[]>(getAllVideos());
-  const [comments, setComments] = useState<CommentProps[]>(getComments(videoId ?? "1"));
+  const [videoData, setVideoData] = useState<VideoProps>();
+  const [videosData, setVideosData] = useState<VideoProps[]>([]);
+  const [allcomments, setAllComments] = useState<CommentProps[]>([]);
+  const [commentsByVideo, setCommentsByVideo] = useState<CommentProps[]>();
 
   useEffect(() => {
-    const data = getVideo(videoId ?? "1");
-    const comments = getComments(videoId ?? "1");
-    setVideoData(data);
-    setComments(comments);
+    (async () => {
+      await fetch("http://localhost:3000/videos")
+        .then((r) => r.json())
+        .then((res) => setVideosData(res));
+      await fetch(`http://localhost:3000/videos/${videoId ?? "1"}`)
+        .then((r) => r.json())
+        .then((res) => setVideoData(res));
+      await fetch(`http://localhost:3000/comments`)
+        .then((r) => r.json())
+        .then((res) => setAllComments(res));
+      setCommentsByVideo(allcomments.filter((el) => el.videoId === videoId));
+    })();
   }, [videoId]);
 
   return (
     <section className="d-flex">
       <div className="d-flex col-8 flex-column row-gap-4 pe-4">
-        <VideoInfo videoData={videoData} className="w-100" />
-        <Comments commentsData={comments} />
+        {videoData && <VideoInfo videoData={videoData} className="w-100" />}
+        <Comments commentsData={commentsByVideo ?? []} />
       </div>
       <div className="flex-grow d-flex flex-column row-gap-2">
         {videosData.map((el, ind) => (
