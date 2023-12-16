@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { VideoInfo, Comments, Video } from "../../organisms";
-// import { getAllVideos, getComments, getVideo } from "../../../api";
 import { CommentProps, VideoProps } from "../../../common";
 
 export const VideoDetail: React.FC = () => {
   const videoId = useParams().id?.toString();
   const [videoData, setVideoData] = useState<VideoProps>();
   const [videosData, setVideosData] = useState<VideoProps[]>([]);
-  const [allcomments, setAllComments] = useState<CommentProps[]>([]);
+  // const [allcomments, setAllComments] = useState<CommentProps[]>([]);
   const [commentsByVideo, setCommentsByVideo] = useState<CommentProps[]>();
 
   useEffect(() => {
@@ -21,8 +20,12 @@ export const VideoDetail: React.FC = () => {
         .then((res) => setVideoData(res));
       await fetch(`http://localhost:3000/comments`)
         .then((r) => r.json())
-        .then((res) => setAllComments(res));
-      setCommentsByVideo(allcomments.filter((el) => el.videoId === videoId));
+        .then((res) => {
+          // setAllComments(res);
+          const c = res.filter((el: any) => el.videoId === videoId);
+          console.log(c, videoId);
+          setCommentsByVideo(c);
+        });
     })();
   }, [videoId]);
 

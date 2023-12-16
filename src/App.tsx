@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AppContainer } from "./components/layouts";
 import { Home, SignUp, Login, Search, Channel, VideoDetail } from "./pages";
+import { PageNotFound } from "./components";
 
 export const App = () => {
   React.useEffect(() => {
@@ -27,6 +28,7 @@ export const App = () => {
           <Route path="search" element={<Search />} />
           <Route path="channel/:id" element={<Channel />} />
           <Route path="video/:id" element={<VideoDetail />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
       <ToastContainer />

@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
       await fetch("http://localhost:3000/videos")
         .then((r) => r.json())
         .then((res) => setAllVideos(res));
-    })()
+    })();
   }, []);
 
   // при сжатии экрана элементы сжимаются, можно сделать через:

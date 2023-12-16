@@ -7,7 +7,7 @@ export type UserProps = {
   profileSrc: string;
   subscriptions: {
     channelId: string;
-  }[]
+  }[];
   email: string;
   name: string;
   password: string;

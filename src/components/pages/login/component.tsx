@@ -50,7 +50,7 @@ export const Login: React.FC = () => {
         (el) => el.email === dataForm.email && el.password === dataForm.password,
       );
       if (isFindData) {
-        toast.success("You have successfully logged in!")
+        toast.success("You have successfully logged in!");
         localStorage.setItem("currentUser", JSON.stringify(isFindData));
         navigate("/");
       } else {

@@ -61,7 +61,9 @@ export const SignUp: React.FC = () => {
     setIsLoading(true);
 
     (async () => {
-      const isFind = users.find((el) => el.email === dataForm.email && el.password === dataForm.password);
+      const isFind = users.find(
+        (el) => el.email === dataForm.email && el.password === dataForm.password,
+      );
       if (!isFind) {
         await fetch("http://localhost:3000/users", {
           method: "post",
