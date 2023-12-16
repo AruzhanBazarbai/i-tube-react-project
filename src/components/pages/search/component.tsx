@@ -15,8 +15,9 @@ export const Search: React.FC = () => {
       (el) =>
         el.title.toLowerCase().includes(searchValue.toLowerCase()) ||
         el.channelName?.toLowerCase().includes(searchValue.toLowerCase()) ||
-        el.description?.toLowerCase().includes(searchValue.toLowerCase()));
-    
+        el.description?.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+
     setVideos(res);
   }, [allVideos, searchValue]);
 

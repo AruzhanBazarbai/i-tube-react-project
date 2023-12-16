@@ -68,18 +68,16 @@ export const SideBar: React.FC = () => {
     if (allChannels.length > 0) {
       const data = localStorage.getItem("currentUser");
       if (data) {
-        console.log(data)
+        console.log(data);
         const tempData = JSON.parse(data);
-        console.log(tempData)
-        console.log(allChannels)
+        console.log(tempData);
+        console.log(allChannels);
         setChannels(
-          tempData?.subscriptions.map((x: any) =>
-            allChannels.find((el) => el.id === x.channelId),
-          ),
+          tempData?.subscriptions.map((x: any) => allChannels.find((el) => el.id === x.channelId)),
         );
       }
     }
-  }, [allChannels])
+  }, [allChannels]);
 
   useEffect(() => {
     const data = localStorage.getItem("currentUser");
@@ -96,7 +94,7 @@ export const SideBar: React.FC = () => {
           .then((r) => r.json())
           .then((res) => {
             setAllChannels(res);
-            console.log(res)
+            console.log(res);
           });
       })();
       const user = JSON.parse(data);
