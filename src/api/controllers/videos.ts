@@ -16,20 +16,21 @@ import { CommentProps, VideoProps } from "../../common";
 
 // export const getAllVideos = async (): Promise<DataResponseProps> => getAsync(ALL_VIDEOS_URL);
 
-export const getAllVideos = () => async () => fetch("http://localhost:3000/videos")
+export const getAllVideos = () => async () => fetch("http://localhost:3000/videos");
 
-export const getVideo = async (id: string) => (await fetch(`http://localhost:3000/videos/${id}`)).json();
+export const getVideo = async (id: string) =>
+  (await fetch(`http://localhost:3000/videos/${id}`)).json();
 
 export const getAllComments = async () => (await fetch("http://localhost:3000/comments")).json();
 
-export const getCommentsByVideoId = async (comments: CommentProps[], videoId: string ) => comments.filter((el)=>el.videoId===videoId);
+export const getCommentsByVideoId = async (comments: CommentProps[], videoId: string) =>
+  comments.filter((el) => el.videoId === videoId);
 
-export const getVideosByChannel = (videos:VideoProps[], channelId: string) =>
+export const getVideosByChannel = (videos: VideoProps[], channelId: string) =>
   videos.filter((el) => el.channelId === channelId);
 
-  
 export const getAllChannels = async () => (await fetch("http://localhost:3000/channels")).json();
-  
+
 export const getChannelById = async (channelId: string) =>
   (await fetch(`http://localhost:3000/channels/${channelId}`)).json();
 

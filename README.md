@@ -1,47 +1,48 @@
-json-server --watch db.json
-# Getting Started with Create React App
+### About the project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Link to the figma-design of the project](https://www.figma.com/file/sqnNbWmKBrzElEd9Czr9gC/youtube?type=design&node-id=0%3A1&mode=design&t=m3CtNpk5rGydDPgh-1)
 
-## Available Scripts
+# ITube is a clone of the YouTube application,
 
-In the project directory, you can run:
+which implements basic functions. There is:
 
-### `npm start`
+- authorization system,
+- home page, where video materials are displayed
+- sidebar, header, search system
+- ability to view the video and channel page
+- ability to comment the video.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+However, the goal of this project was not only to clone
+YouTube, but to write a full-fledged project, with the right structure (atomic design), stylization (bootstrap, eslint,
+prettier) and with clean code (husky, github branches, styled-components)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The PWA application and the backend part using the json-server are also included here.
 
-### `npm test`
+## How to start project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Open a browser with protection disabled or disable the cors mode in queries somehow
+2. yarn add (command)
+3. yarn start (command)
+4. json-server --watch db.json (command in another terminal)
 
-### `npm run build`
+### authorization system
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First, you will see the login page. If you are not registered, you can use the provided link to go to the registration page and register. if there is no email in the system that you enter, then your account will be created and after receiving a notification that registration was successful, you will need to login again, where you will be redirected. After a successful login, you will be taken to the main page and your data will be stored in localStorage so that next time you do not ask for a login again
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### main app logic
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+On the main page you can see the search bar and the logout button
 
-### `npm run eject`
+And in the sidebar you can see your data and a list of channels to which you are subscribed
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Also, video materials will be displayed on the main page, which you can click on
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can also search for the video material you need, watch the video in detail, as well as comment on this video and see the details of the channel
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### PWA
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+If you enter a non-existent path, you will see page 404, after which you can go to the main page
 
-## Learn More
+If the Internet is disconnected, information about this will be displayed and you are asked to try to connect the Internet.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application also includes service-workers, that perform many functions such as caching, etc.
